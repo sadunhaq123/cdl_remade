@@ -4,14 +4,15 @@ file1 = open('apps-cdl.txt', 'r')
 Lines = file1.readlines()
 list_of_rows = []
 list_of_cves = []
-list_of_all = []
 cve_and_application_mapping = {}
 one_minute = 600
 four_minute = 2400
-train_classifier_path = 'C:/Users/12103/PycharmProjects/cdl_remade/venv/train_classifier/'
-#train_classifier_path = 'C:/Users/sadun/PycharmProjects/cdl_remade/venv/train_classifier/'
+three_minute = 1800
+seven_minute =4200
+list_of_all = []
+test_classifier_path = 'C:/Users/12103/PycharmProjects/cdl_remade/venv/test_classifier/'
+#test_classifier_path = 'C:/Users/sadun/PycharmProjects/cdl_remade/venv/test_classifier/'
 #df = pd.DataFrame()
-#df_all = pd.DataFrame()
 df2 = pd.DataFrame()
 list_of_values = [1,2,3,4]
 for line in Lines:
@@ -59,7 +60,7 @@ for cve_path in list_of_cves:
             continue
 
 
-        elif line_number <= one_minute + 1:
+        elif line_number > three_minute + 1 and line_number <= seven_minute+1:
             #print(cve_path,content)
             data = content.split(",")[1:]
             #print(data)
@@ -67,9 +68,8 @@ for cve_path in list_of_cves:
             data.append(cve_and_application_mapping[cve][0])
             #print(data)
 
-            list_of_all.append(data)
             list_of_rows.append(data)
-
+            list_of_all.append(data)
         line_number += 1
 
     if cve_four_counter % 4 ==0:
@@ -77,14 +77,13 @@ for cve_path in list_of_cves:
         df = pd.DataFrame(list_of_rows)
 
         list_of_rows.clear()
-        path_to_pickle = train_classifier_path + cve + '.pkl'
+        path_to_pickle = test_classifier_path + cve + '.pkl'
         #print(df)
         #break
         df.to_pickle(path_to_pickle)
 
     cve_four_counter +=1
 
-
 df_all = pd.DataFrame(list_of_all)
-path_all_to_pickle = train_classifier_path + 'all_combined.pkl'
+path_all_to_pickle = test_classifier_path + 'all_combined.pkl'
 df_all.to_pickle(path_all_to_pickle)

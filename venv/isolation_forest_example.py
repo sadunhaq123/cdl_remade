@@ -25,21 +25,27 @@ def display(results):
 #test_data_pickle = ['test_classifier/all_combined.pkl']
 #CVE-2012-1823
 
-train_data_pickle = ['train_autoencoder_with_timestamp/CVE-2012-1823-1.pkl']
-test_data_pickle  = ['test_autoencoder_with_timestamp/CVE-2012-1823-1.pkl']
+train_data_combined = pd.DataFrame()
+test_data_combined  = pd.DataFrame()
+for i in range(1, 5):
+    train_data_pickle = ['train_autoencoder_with_timestamp/CVE-2012-1823-' + str(i) + '.pkl']
+    test_data_pickle  = ['test_autoencoder_with_timestamp/CVE-2012-1823-' + str(i) +'.pkl']
+    train_data = pd.read_pickle(train_data_pickle[0])
+    test_data = pd.read_pickle(test_data_pickle[0])
+    train_data_combined = pd.concat([train_data_combined, train_data], axis=0)
+    test_data_combined  = pd.concat([test_data_combined, test_data], axis=0)
 
-train_data = pd.read_pickle(train_data_pickle[0])
-test_data = pd.read_pickle(test_data_pickle[0])
+
 #print(test_data)
 #exit()
 
-train_data_x = train_data.iloc[:, :-1] #All rows and columns without label
-train_data_y = train_data.iloc[:, -1:] # All rows and 1 column with label ONLY
+train_data_x = train_data_combined.iloc[:, :-1] #All rows and columns without label
+train_data_y = train_data_combined.iloc[:, -1:] # All rows and 1 column with label ONLY
 #print(train_data_y)
 
 
-test_data_x = test_data.iloc[:, :-1]
-test_data_y = test_data.iloc[:, -1:]
+test_data_x = test_data_combined.iloc[:, :-1]
+test_data_y = test_data_combined.iloc[:, -1:]
 print(test_data_y)
 #print(type(test_data_y))
 
@@ -70,7 +76,11 @@ print(scaled_test_data_x)
 #model = IsolationForest(contamination='auto', max_features=555)
 model = IsolationForest(contamination=0.01, max_features=555)
 
-model.fit(scaled_test_data_x)
+df_train_x = pd.DataFrame(scaled_train_data_x)
+df_test_x  = pd.DataFrame(scaled_test_data_x)
+
+full_df = pd.concat([df_train_x, df_test_x], axis=0)
+model.fit(full_df)
 
 y_pred = model.predict(scaled_test_data_x)
 print(y_pred)
@@ -78,8 +88,12 @@ print(len(y_pred))
 print(y_pred.shape)
 
 print(type(y_pred))
-x = np.where(y_pred == -1)
-print(x)
+
+actual_numpy =  test_data_y.to_numpy()
+actual = np.where(actual_numpy == -1)
+print(actual)
+predicted = np.where(y_pred == -1)
+print(predicted)
 
 
 #accuracy = metrics.accuracy_score(y_pred, label_encoded_test_y)

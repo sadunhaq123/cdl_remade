@@ -57,7 +57,8 @@ for first_line in reading_file_lists:
     json_file_name = image_name_and_tag
     print("JSON:", json_file_name)
 
-    file1 = open('tuda_tests/Grype/' +json_file_name,'r', encoding='utf-8')
+    #file1 = open('tuda_tests/Grype/' +json_file_name,'r', encoding='utf-8')
+    file1 = open(json_file_name, 'r', encoding='utf-8')
     #print('clair_official_with_json/clair_official_digests_tag_upto_2/' +content_first)
     #Lines = file1.readlines()
 
@@ -81,14 +82,16 @@ for first_line in reading_file_lists:
     for i in range(len(vulnerabilities)):
         first_dict = vulnerabilities[i]['vulnerability']
         print(first_dict)
-        exit()
+        print(first_dict['id'])
+        #print(vulnerabilities[i]['id'])
+        #exit()
         
     
     
         try:
-            id = vulnerabilities[i]['id']
+            id = first_dict['id']
             print(id)
-            exit()
+            #exit()
             #print(id)
         except KeyError:
             #print("id not found")
@@ -96,15 +99,25 @@ for first_line in reading_file_lists:
             
         
         try:
-            cvssScore = vulnerabilities[i]['metrics']
-            print(cvssScore)
-            exit()
+            cvssScoreHolder = first_dict['cvss']
+            print(cvssScoreHolder)
+            try:
+                metrics_holder = cvssScoreHolder[-1]
+                metrics = metrics_holder['metrics']
+                # print(metrics)
+                baseScore = metrics['baseScore']
+                cvssScore = baseScore
+                print(cvssScore)
+            except IndexError:
+                cvssScore = None
+
+            #exit()
         except KeyError:
             #print("cvssScore not found")
             cvssScore = None
 
         try:
-            description = vulnerabilities[i]['description']
+            description = first_dict['description']
             #print(description)
         except KeyError:
             #print("description not found")
@@ -131,19 +144,40 @@ for first_line in reading_file_lists:
             #print("nvdSeverity not found")
             nvdSeverity = None
 
-        try:
-            package_type = vulnerabilities[i]['packageManager']
-            #print(packageManager)
-        except KeyError:
-            #print("packageManager not found")
-            package_type = None
+        # try:
+        #     packageType = vulnerabilities[i]['packageManager']
+        #     #print(packageManager)
+        # except KeyError:
+        #     #print("packageManager not found")
+        #     packageType = None
 
         try:
-            package_name = vulnerabilities[i]['packageName']
+            matchDetails = vulnerabilities[i]['matchDetails'][0]
+            #print("MM",matchDetails)
+            #exit()
+            blockHolder = matchDetails['searchedBy']
+            try:
+                distroHolder = blockHolder['distro']
+                packageType = distroHolder['type']
+            except KeyError:
+                packageType = None
+
+            try:
+                packageHolder = blockHolder['package']
+
+            except KeyError:
+                packageHolder = blockHolder['Package']
+            packageName = packageHolder['name']
+            packageVersion = packageHolder['version']
+            #print("PP:",packageHolder)
+            #print(packageName)
+            #print(packageVersion)
+            #exit()
             #print(packageName)
         except KeyError:
             #print("packageName not found")
-            package_name = None
+            packageName = None
+            packageVersion = None
 
         try:
             patches = vulnerabilities[i]['patches']
@@ -153,7 +187,7 @@ for first_line in reading_file_lists:
             patches = None
 
         try:
-            severity = vulnerabilities[i]['severity']
+            severity = first_dict['severity']
             #print(severity)
         except KeyError:
             #print("severity not found")
@@ -218,11 +252,12 @@ for first_line in reading_file_lists:
             
         
         try:
-            fixed_version = vulnerabilities[i]['nearestFixedInVersion']
+            fixedBlock = first_dict['fix']
+            fixedVersion = fixedBlock['versions']
             #print(version)
         except KeyError:
             #print("version not found")
-            fixed_version = None
+            fixedVersion = None
 
 
 
@@ -231,16 +266,16 @@ for first_line in reading_file_lists:
         id_list.append(id)
         identifiers_list.append(identifiers)
         nvdSeverity_list.append(nvdSeverity)
-        packageManager_list.append(package_type)
+        packageManager_list.append(packageType)
         description_list.append(description)
-        packageName_list.append(package_name)
+        packageName_list.append(packageName)
         patches_list.append(patches)
         severity_list.append(severity)
         title_list.append(title)
         from_list_list.append(from_list)
         name_list.append(name)
-        version_list.append(version)
-        fixed_version_list.append(fixed_version)
+        version_list.append(packageVersion)
+        fixed_version_list.append(fixedVersion)
         modified_time_list.append(modification_time)
         assigner_list.append(assigner)
 
